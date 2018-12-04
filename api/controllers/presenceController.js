@@ -84,12 +84,3 @@ exports.updateAlertedStateForSpecificPerson = function (req, res) {
     writePresenceToFile(presences);
     res.json(presences);
 };
-
-
-exports.dropItLikeItsHot = function (req, res) {
-    console.log('dropItLikeItsHot');
-    Presence.remove({}, function (err) {
-        console.log('collection removed');
-        res.send('collection removed');
-    });
-};

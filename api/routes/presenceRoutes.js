@@ -17,7 +17,4 @@ module.exports = function (app) {
     app.route('/presence/:name/:status/:alerted')
         .get(versionResultController.updateAlertedStateForSpecificPerson)
         .put(versionResultController.updateAlertedStateForSpecificPerson);
-
-    app.route('/presence/dropItLikeItsHot')
-        .post(versionResultController.dropItLikeItsHot);
 };
