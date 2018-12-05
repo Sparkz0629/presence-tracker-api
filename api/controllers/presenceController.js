@@ -46,15 +46,15 @@ exports.getPresenceForSpecificPerson = function (req, res) {
     }
 };
 
-exports.addOrUpdateNewPresenceForSpecificPerson = function (req, res) {
-    console.log('addOrUpdateNewPresenceForSpecificPerson:' + req.params.name + '|' + req.params.status);
+exports.addOrUpdatePresenceForSpecificPerson = function (req, res) {
+    console.log('addOrUpdatePresenceForSpecificPerson:' + req.params.name + '|' + req.method);
+    const method = req.method;
     const name = req.params.name;
-    const status = req.params.status;
 
     let updatedPresence = {
-        "status": status,
+        "status": ((method === "PUT" || method === "GET") ? 'entered' : 'exited'), //TODO remove GET
         "timestamp": Date.now(),
-        "alerted": "N"
+        "alerted": false
     };
 
     let presences = readPresenceFromFile();
@@ -66,18 +66,16 @@ exports.addOrUpdateNewPresenceForSpecificPerson = function (req, res) {
 };
 
 exports.updateAlertedStateForSpecificPerson = function (req, res) {
-    console.log('updateAlertedStateForSpecificPerson: ' + req.params.name + '|' + req.params.status + '|' + req.params.alerted);
+    console.log('updateAlertedStateForSpecificPerson: ' + req.params.name);
     const name = req.params.name;
-    const status = req.params.status;
-    const alerted = req.params.alerted;
-
-    let updatedPresence = {
-        "status": status,
-        "timestamp": Date.now(),
-        "alerted": alerted
-    };
 
     let presences = readPresenceFromFile();
+
+    let updatedPresence = {
+        "status": presences[name].status,
+        "timestamp": Date.now(),
+        "alerted": true
+    };
 
     presences[name] = updatedPresence;
 

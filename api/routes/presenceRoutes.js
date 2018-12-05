@@ -1,20 +1,21 @@
 'use strict';
 
 module.exports = function (app) {
-    let versionResultController = require('../controllers/presenceController');
+    let presenceController = require('../controllers/presenceController');
 
 
     app.route('/presence')
-        .get(versionResultController.getLatestPresenceForAllPersons);
+        .get(presenceController.getLatestPresenceForAllPersons);
 
     app.route('/presence/:name')
-        .get(versionResultController.getPresenceForSpecificPerson);
+        .get(presenceController.getPresenceForSpecificPerson);
 
-    app.route('/presence/:name/:status')
-        .get(versionResultController.addOrUpdateNewPresenceForSpecificPerson)
-        .put(versionResultController.addOrUpdateNewPresenceForSpecificPerson);
+    app.route('/presence/:name/home')
+        .get(presenceController.addOrUpdatePresenceForSpecificPerson)
+        .put(presenceController.addOrUpdatePresenceForSpecificPerson)
+        .delete(presenceController.addOrUpdatePresenceForSpecificPerson);
 
-    app.route('/presence/:name/:status/:alerted')
-        .get(versionResultController.updateAlertedStateForSpecificPerson)
-        .put(versionResultController.updateAlertedStateForSpecificPerson);
+    app.route('/presence/:name/alerted')
+        .get(presenceController.updateAlertedStateForSpecificPerson)
+        .put(presenceController.updateAlertedStateForSpecificPerson);
 };
