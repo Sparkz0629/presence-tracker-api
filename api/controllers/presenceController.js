@@ -9,12 +9,14 @@ function readPresenceFromFile() {
         // Check if file exists, if not, pass an empty object back
         if (fs.existsSync(presenceStoreFile)) {
             let presences = fs.readFileSync(presenceStoreFile);
+            console.log('read from file:' +presences)
             return JSON.parse(presences);
         }
         return {};
     }
     catch (err) {
         //If there are any errors during reading of the file, pass an empty object back
+        console.log(err);
         return {};
     }
 }
@@ -69,15 +71,15 @@ exports.updateAlertedStateForSpecificPerson = function (req, res) {
     const name = req.params.name;
 
     let presences = readPresenceFromFile();
+    console.log(presences[req.params.name]);
 
-    let updatedPresence = {
+    presences[name] = {
         "status": presences[name].status,
         "timestamp": Date.now(),
         "alerted": true
     };
 
-    presences[name] = updatedPresence;
-
     writePresenceToFile(presences);
     res.json(presences);
+    console.log('updateAlertedStateForSpecificPerson: ' + req.params.name + ' - DONE')
 };
