@@ -31,7 +31,6 @@ exports.getLatestPresenceForAllPersons = function (req, res) {
     console.log('getLatestPresenceForAllPersons');
 
     let presences = readPresenceFromFile();
-    console.log(presences);
     res.json(presences);
 };
 
