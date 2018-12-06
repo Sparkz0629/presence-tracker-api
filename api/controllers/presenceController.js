@@ -9,10 +9,10 @@ function readPresenceFromFile() {
         // Check if file exists, if not, pass an empty object back
         if (fs.existsSync(presenceStoreFile)) {
             let presences = fs.readFileSync(presenceStoreFile);
-            console.log('read from file:' +presences)
             return JSON.parse(presences);
+        } else {
+            return {};
         }
-        return {};
     }
     catch (err) {
         //If there are any errors during reading of the file, pass an empty object back
@@ -22,11 +22,7 @@ function readPresenceFromFile() {
 }
 
 function writePresenceToFile(content) {
-    fs.writeFile(presenceStoreFile, JSON.stringify(content, null, 4), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-    });
+    fs.writeFileSync(presenceStoreFile, JSON.stringify(content, null, 4));
 }
 
 exports.getLatestPresenceForAllPersons = function (req, res) {
@@ -71,7 +67,6 @@ exports.updateAlertedStateForSpecificPerson = function (req, res) {
     const name = req.params.name;
 
     let presences = readPresenceFromFile();
-    console.log(presences[req.params.name]);
 
     presences[name] = {
         "status": presences[name].status,
@@ -81,5 +76,4 @@ exports.updateAlertedStateForSpecificPerson = function (req, res) {
 
     writePresenceToFile(presences);
     res.json(presences);
-    console.log('updateAlertedStateForSpecificPerson: ' + req.params.name + ' - DONE')
 };
