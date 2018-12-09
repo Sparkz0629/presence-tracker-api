@@ -26,8 +26,6 @@ function writePresenceToFile(content) {
 }
 
 exports.getLatestPresenceForAllPersons = function (req, res) {
-    console.log('getLatestPresenceForAllPersons');
-
     let presences = readPresenceFromFile();
     res.json(presences);
 };
