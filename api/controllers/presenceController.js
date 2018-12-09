@@ -45,11 +45,11 @@ exports.getPresenceForSpecificPerson = function (req, res) {
 
 exports.addOrUpdatePresenceForSpecificPerson = function (req, res) {
     console.log('addOrUpdatePresenceForSpecificPerson:' + req.params.name + '|' + req.method);
-    const method = req.method;
     const name = req.params.name;
+    const state = req.params.state;
 
     let updatedPresence = {
-        "status": ((method === "PUT" || method === "GET") ? 'entered' : 'exited'), //TODO remove GET
+        "status": state,
         "timestamp": Date.now(),
         "alerted": false
     };
