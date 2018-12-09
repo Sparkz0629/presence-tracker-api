@@ -14,5 +14,5 @@ module.exports = function (app) {
         .put(presenceController.addOrUpdatePresenceForSpecificPerson);
 
     app.route('/presence/:name/alerted')
-        .put(presenceController.updateAlertedStateForSpecificPerson);
+        .patch(presenceController.updateAlertedStateForSpecificPerson);
 };
