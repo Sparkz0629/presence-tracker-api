@@ -2,3 +2,5 @@ node_modules/
 .idea/
 *.iml
 presenceState.json
+presence-tracker-api-docker/
+package-lock.json

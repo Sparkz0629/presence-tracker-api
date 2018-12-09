@@ -1,7 +1,0 @@
-version: '3'
-services:
-  api:
-    image: sbg-name-alerted-tracker-api:latest
-    ports:
-     - "5100:5100"
-    restart: always
