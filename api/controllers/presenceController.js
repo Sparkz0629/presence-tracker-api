@@ -44,7 +44,7 @@ exports.getPresenceForSpecificPerson = function (req, res) {
 };
 
 exports.addOrUpdatePresenceForSpecificPerson = function (req, res) {
-    console.log('addOrUpdatePresenceForSpecificPerson:' + req.params.name + '|' + req.method);
+    console.log('addOrUpdatePresenceForSpecificPerson:' + req.params.name + '|' + req.params.state);
     const name = req.params.name;
     const state = req.params.state;
 
